@@ -1,3 +1,11 @@
+//
+//  View+Extension+macOS.swift
+//  MCEmojiPicker
+//
+//  Created by Angelo Cammalleri.
+//  Passable additions are distributed under the repository MIT license.
+//
+
 #if os(macOS)
 import SwiftUI
 import AppKit

@@ -1,3 +1,11 @@
+//
+//  MCEmojiFeedbackStyle.swift
+//  MCEmojiPicker
+//
+//  Created by Angelo Cammalleri.
+//  Passable additions are distributed under the repository MIT license.
+//
+
 #if canImport(UIKit)
 import UIKit
 
