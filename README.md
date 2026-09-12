@@ -24,6 +24,8 @@ If you know how to fix it - welcome to the [discussion](https://github.com/izyum
 
 ## Apps Using
 
+[Passable](https://apps.apple.com/app/id6756588944) uses MCEmojiPicker for avatar and logo emoji selection in custom Apple Wallet passes.
+
 <p float="left">
     <a href="https://apps.apple.com/app/id1500111859"><img src="https://github.com/user-attachments/assets/bc8b8235-b848-43ef-a143-fbce80c195d3" height="65"></a>
     <a href="https://apps.apple.com/app/id6450279059"><img src="https://github.com/izyumkin/MCEmojiPicker/assets/50948518/270146ff-d3e7-4c46-97c2-2c796e6bd78d" height="65"></a>
@@ -46,6 +48,7 @@ If you use a `MCEmojiPicker`, add your application via Pull Request. Fore more i
 ## Navigation
 
 - [Requirements](#requirements)
+- [Platform support](Documentation/PlatformSupport.md)
 - [Installation](#installation)
     - [CocoaPods](#cocoapods)
     - [Swift Package Manager](#swift-package-manager)
@@ -64,13 +67,16 @@ If you use a `MCEmojiPicker`, add your application via Pull Request. Fore more i
 
 ## Requirements
 
-- Swift `4.2` & `5.0`
-- Ready for use on iOS 12.0+
-- SwiftUI is supported from iOS 13.0
+- Swift Package Manager requires Swift tools `5.10` or later.
+- The package supports iOS 13.0+, macOS 11.0+, and visionOS 1.0+.
+- The native macOS SwiftUI picker requires macOS 13.0+.
+- iOS and visionOS provide a UIKit picker and SwiftUI modifier.
 
 ## Installation
 
 ### CocoaPods
+
+The published CocoaPods release is iOS-only. The additional platforms documented here use the current Swift package source.
 
 [CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate `MCEmojiPicker` into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
@@ -82,7 +88,7 @@ pod 'MCEmojiPicker'
 
 The [Swift Package Manager](https://swift.org/package-manager/) is a tool for managing the distribution of Swift code. It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
 
-To integrate `MCEmojiPicker` into your Xcode project using Xcode 11, specify it in `Project > Swift Packages`:
+To integrate `MCEmojiPicker` into your Xcode project using Xcode, specify it in `Project > Swift Packages`:
 
 ```ogdl
 https://github.com/izyumkin/MCEmojiPicker
@@ -124,13 +130,13 @@ viewController.selectedEmojiCategoryTintColor = .systemRed
 ```
 
 ### Arrow direction
-By default, EmojiPicker lets the system choose whether to open above or below the source view so the picker remains visible. Set an explicit direction when a fixed placement is required.
+By default, the system chooses whether the picker opens above or below its source view. Assign an explicit direction to override automatic placement:
 
 ```swift
 viewController.arrowDirection = .up
 ```
 
-For UIKit integrations, assigning `arrowDirection` disables automatic placement. Set `automaticallyAdjustsArrowDirection` back to `true` to restore it.
+Assigning `arrowDirection` disables automatic placement. Set `automaticallyAdjustsArrowDirection` to `true` to restore it.
 
 ### Horizontal inset
 Inset from the `sourceView` border. The default value of this property is `0`.
@@ -154,7 +160,7 @@ viewController.customHeight = 300
 ```
 
 ### Feedback generator style
-Feedback generator style. To turn off, set `nil` to this parameter. The default value of this property is `.light`.
+On iOS, this sets the feedback generator style. Set the UIKit controller property to `nil` to turn it off; its default is `.light`. Haptics are unavailable on macOS and visionOS.
 
 ```swift
 viewController.feedBackGeneratorStyle = .soft
@@ -162,7 +168,7 @@ viewController.feedBackGeneratorStyle = .soft
 
 ## SwiftUI
 
-Use like system popover. All settings are available in the method initializer.
+Use like system popover. All settings are available in the method initializer. See [Platform support](Documentation/PlatformSupport.md) for native macOS search and platform-specific options.
 
 ```swift
 Button(selectedEmoji) {
@@ -173,7 +179,7 @@ Button(selectedEmoji) {
 )
 ```
 
-or interact directly with the SwiftUI wrapper for the MCEmojiPickerViewController:
+On iOS and visionOS, you can also interact directly with the SwiftUI wrapper for MCEmojiPickerViewController:
 
 ```swift
 MCEmojiPickerRepresentableController(
@@ -183,8 +189,7 @@ MCEmojiPickerRepresentableController(
     customHeight: 380.0,
     horizontalInset: .zero,
     isDismissAfterChoosing: true,
-    selectedEmojiCategoryTintColor: .systemBlue,
-    feedBackGeneratorStyle: .light
+    selectedEmojiCategoryTintColor: .systemBlue
 )
 ```
 
@@ -199,4 +204,5 @@ MCEmojiPickerRepresentableController(
 -   [x] Automatic adjustment of the relevant set of emoji for the iOS version
 -   [x] Select skin tones from popup
 -   [x] Frequently used
--   [ ] Search bar and search results
+-   [x] Search bar and search results on macOS
+-   [ ] Search bar and search results on iOS and visionOS
