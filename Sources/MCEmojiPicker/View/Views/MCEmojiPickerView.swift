@@ -92,9 +92,29 @@ final class MCEmojiPickerView: UIView {
     private let categoriesStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .popoverBackgroundColor
+        stackView.backgroundColor = .clear
         stackView.distribution = .fillEqually
         return stackView
+    }()
+
+    private let categoriesBlurView: UIVisualEffectView = {
+        #if os(visionOS)
+        let effect = UIBlurEffect(style: .systemMaterialDark)
+        #else
+        let effect = UIBlurEffect(style: .systemMaterial)
+        #endif
+        let blurView = UIVisualEffectView(effect: effect)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        blurView.backgroundColor = .clear
+        blurView.contentView.backgroundColor = .clear
+        return blurView
+    }()
+
+    private let categoriesTintView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.08)
+        return view
     }()
     
     private var previewContainerView = UIView()
@@ -174,10 +194,22 @@ final class MCEmojiPickerView: UIView {
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         separatorView.backgroundColor = Constants.separatorColor
         
+        addSubview(categoriesBlurView)
+        categoriesBlurView.contentView.addSubview(categoriesTintView)
         addSubview(categoriesStackView)
         addSubview(separatorView)
         
         NSLayoutConstraint.activate([
+            categoriesBlurView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            categoriesBlurView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            categoriesBlurView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            categoriesBlurView.heightAnchor.constraint(
+                equalToConstant: categoriesStackViewHeight + safeAreaInsets.bottom
+            ),
+            categoriesTintView.leadingAnchor.constraint(equalTo: categoriesBlurView.contentView.leadingAnchor),
+            categoriesTintView.trailingAnchor.constraint(equalTo: categoriesBlurView.contentView.trailingAnchor),
+            categoriesTintView.topAnchor.constraint(equalTo: categoriesBlurView.contentView.topAnchor),
+            categoriesTintView.bottomAnchor.constraint(equalTo: categoriesBlurView.contentView.bottomAnchor),
             categoriesStackView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Constants.categoriesStackViewInsets.left

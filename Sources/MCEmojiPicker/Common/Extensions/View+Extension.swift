@@ -21,8 +21,9 @@
 // SOFTWARE.
 
 import SwiftUI
+import UIKit
 
-@available(iOS 13, *)
+@available(iOS 13.0, visionOS 1.0, *)
 extension View {
     /// The method adds a macOS style emoji picker.
     ///
@@ -43,7 +44,7 @@ extension View {
         horizontalInset: CGFloat? = nil,
         isDismissAfterChoosing: Bool? = nil,
         selectedEmojiCategoryTintColor: UIColor? = nil,
-        feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil
+        feedBackGeneratorStyle: MCEmojiFeedbackStyle? = nil
     ) -> some View {
         self.overlay(
             MCEmojiPickerRepresentableController(

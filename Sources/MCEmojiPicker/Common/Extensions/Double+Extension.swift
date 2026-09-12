@@ -36,6 +36,9 @@ extension Double {
     /// - Parameter isOnlyToIncrease: Responsible for whether the value will decrease if the screen size is smaller than the default.
     func fit(isOnlyToIncrease: Bool = true) -> Double {
         let defaultScreenSize = CGSize(width: 375, height: 812)
+        #if os(visionOS)
+        return self
+        #else
         let currentScreenSize = UIScreen.main.bounds.size
         // Check the type of the current device, if it is not a phone, return the original value.
         guard UIDevice.current.userInterfaceIdiom == .phone else { return self }
@@ -44,5 +47,6 @@ extension Double {
             scale = currentScreenSize.height / defaultScreenSize.height
         }
         return self * scale
+        #endif
     }
 }

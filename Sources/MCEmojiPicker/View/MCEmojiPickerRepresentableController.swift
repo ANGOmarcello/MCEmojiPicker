@@ -21,8 +21,9 @@
 // SOFTWARE.
 
 import SwiftUI
+import UIKit
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, visionOS 1.0, *)
 public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentable {
     
     // MARK: - Public Properties
@@ -67,7 +68,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     /// Feedback generator style. To turn off, set `nil` to this parameter.
     ///
     /// The default value of this property is `.light`.
-    public var feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle?
+    public var feedBackGeneratorStyle: MCEmojiFeedbackStyle?
     
     // MARK: - Initializers
     
@@ -79,7 +80,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         horizontalInset: CGFloat? = nil,
         isDismissAfterChoosing: Bool? = nil,
         selectedEmojiCategoryTintColor: UIColor? = nil,
-        feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil
+        feedBackGeneratorStyle: MCEmojiFeedbackStyle? = nil
     ) {
         self._isPresented = isPresented
         self._selectedEmoji = selectedEmoji
@@ -119,7 +120,9 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
             if let selectedEmojiCategoryTintColor {
                 emojiPicker.selectedEmojiCategoryTintColor = selectedEmojiCategoryTintColor
             }
+            #if !os(visionOS)
             if let feedBackGeneratorStyle { emojiPicker.feedBackGeneratorStyle = feedBackGeneratorStyle }
+            #endif
             context.coordinator.addPickerDismissingObserver()
             representableController.present(emojiPicker, animated: true)
         case false:
@@ -133,7 +136,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
 
 // MARK: - Coordinator
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, visionOS 1.0, *)
 extension MCEmojiPickerRepresentableController {
     public class Coordinator: NSObject, MCEmojiPickerDelegate {
         
