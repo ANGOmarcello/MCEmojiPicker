@@ -1,9 +1,7 @@
 # Fork provenance and maintenance
 
-This fork keeps MCEmojiPicker as a focused emoji library. AppToolkit owns any
-composition with images, SF Symbols, Photos, Files, or camera. Product routes,
-image preparation, cropping/export limits, persistence, upload policy, analytics,
-privacy usage descriptions, and web-image attribution belong to consuming apps.
+This guide records the origin of the fork's emoji-picker improvements and how
+to maintain them across upstream updates and releases.
 
 ## Upstream and local history
 
@@ -40,11 +38,10 @@ filtering, selection binding, and shared usage persistence. Default popover
 placement permits either vertical direction; explicit direction remains
 respected.
 
-An AppToolkit dependency should be limited to iOS, macOS, and visionOS. Do not
-make watchOS or tvOS targets import this picker. Keep `MCEmojiPicker` as the
-module/product name for source compatibility. Consumers must resolve one
-versioned remote copy, not combine this fork with the vendored Passable copy or
-an independent upstream dependency of the same package identity.
+Only iOS, macOS, and visionOS targets should import this picker. Keep
+`MCEmojiPicker` as the module/product name for source compatibility. Consumers
+should resolve one versioned remote copy, replacing an upstream dependency or
+vendored copy when adopting this fork.
 
 ## Existing behavior and limits
 
@@ -56,23 +53,23 @@ English-only text; adding localization belongs to a focused follow-up. Existing
 UserDefaults usage and skin-tone keys are preserved so the migration does not
 erase prior choices. A future configurable store requires explicit migration.
 The upstream limitation for two-part skin-tone emoji remains documented in the
-README. Builds and unit tests do not prove visual behavior or physical-device
-camera functionality in an AppToolkit composition.
+README. Verify presentation and selection in a real host app alongside builds
+and unit tests.
 
 ## Updating and releasing
 
 1. Fetch `upstream`, inspect its changes, and merge/rebase without replacing
    original history or dropping the MIT attribution.
-2. Keep emoji-library changes separate from AppToolkit composition and app
-   product logic. Add focused regression tests for changed behavior.
+2. Keep changes focused on emoji selection, catalog behavior, and picker
+   presentation. Add focused regression tests for changed behavior.
 3. Run `swift test` and `git diff --check`. Compile the library for generic iOS
    Simulator and visionOS Simulator destinations, and macOS. For UI changes,
    inspect real iOS/macOS hosts, repeat open/dismiss, category selection,
    searching, emoji/skin-tone selection, and explicit/automatic placement.
 4. Publish a fork release tag only after review and validation. Verify the
-   remote tag points at the tested commit before updating AppToolkit.
-5. Release AppToolkit with the versioned fork dependency. Resolve each consumer
-   from remote, inspect `Package.resolved`, and build affected platforms before
-   deleting its vendored package or duplicate presentation code.
+   remote tag points at the tested commit.
+5. Verify that a consumer can resolve the published release through Swift
+   Package Manager. Inspect `Package.resolved` and build affected platforms
+   before replacing an older dependency or vendored copy.
 6. Keep this fork's public README/package metadata distinct from upstream's
    CocoaPods release. Do not publish under upstream's CocoaPods identity.
