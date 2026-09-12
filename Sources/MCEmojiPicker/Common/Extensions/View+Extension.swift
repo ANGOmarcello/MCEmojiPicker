@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 // The MIT License (MIT)
 //
 // Copyright © 2023 Ivan Izyumkin
@@ -61,3 +62,4 @@ extension View {
         )
     }
 }
+#endif

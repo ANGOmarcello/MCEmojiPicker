@@ -19,7 +19,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#if __has_include(<UIKit/UIKit.h>)
 #import <UIKit/UIKit.h>
+#endif
 
 //! Project version number for MCEmojiPicker.
 FOUNDATION_EXPORT double MCEmojiPickerVersionNumber;
@@ -28,5 +30,4 @@ FOUNDATION_EXPORT double MCEmojiPickerVersionNumber;
 FOUNDATION_EXPORT const unsigned char MCEmojiPickerVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <MCEmojiPicker/PublicHeader.h>
-
 

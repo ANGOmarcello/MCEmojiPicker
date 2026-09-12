@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 // The MIT License (MIT)
 //
 // Copyright © 2022 Ivan Izyumkin
@@ -216,3 +217,4 @@ extension MCEmojiPreviewBackgroundView {
         backgroundPath = path.cgPath
     }
 }
+#endif

@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 // The MIT License (MIT)
 //
 // Copyright © 2022 Ivan Izyumkin
@@ -219,3 +220,4 @@ final class MCEmojiSkinTonePickerView: UIView {
         addSubview(contentStackView)
     }
 }
+#endif

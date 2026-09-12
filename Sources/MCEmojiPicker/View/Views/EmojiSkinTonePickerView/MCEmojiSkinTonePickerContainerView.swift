@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 // The MIT License (MIT)
 //
 // Copyright © 2022 Ivan Izyumkin
@@ -140,3 +141,4 @@ extension MCEmojiSkinTonePickerContainerView: MCEmojiSkinTonePickerViewDelegate 
         delegate?.feedbackImpactOccurred()
     }
 }
+#endif

@@ -40,7 +40,7 @@ public struct MCEmojiCategory: Codable {
 
 /// This enumeration shows a list of categories that are contained in the main collection.
 @_spi(JSON)
-public enum MCEmojiCategoryType: Int, CaseIterable, Codable {
+public enum MCEmojiCategoryType: Int, CaseIterable, Codable, Hashable {
     case frequentlyUsed
     case people
     case nature

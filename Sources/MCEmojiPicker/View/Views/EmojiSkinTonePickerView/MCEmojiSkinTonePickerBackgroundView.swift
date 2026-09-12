@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 // The MIT License (MIT)
 //
 // Copyright © 2022 Ivan Izyumkin
@@ -218,3 +219,4 @@ extension MCEmojiSkinTonePickerBackgroundView {
         backgroundPath = path.cgPath
     }
 }
+#endif

@@ -22,6 +22,8 @@
 
 import Foundation
 
+#if canImport(UIKit)
+
 /// Protocol for the `MCEmojiPickerViewModel`.
 protocol MCEmojiPickerViewModelProtocol {
     /// Whether the picker shows empty categories. Default false.
@@ -102,3 +104,4 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
         return allEmojiCategories[allCategoriesIndex].emojis[indexPath.row]
     }
 }
+#endif

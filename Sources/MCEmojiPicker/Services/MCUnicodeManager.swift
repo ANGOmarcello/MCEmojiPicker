@@ -21,11 +21,13 @@
 // SOFTWARE.
 
 import Foundation
-import UIKit.UIDevice
+#if canImport(UIKit)
+import UIKit
+#endif
 
 /// Protocol for the `MCUnicodeManager`.
 protocol MCUnicodeManagerProtocol {
-    /// Returns categories with filtered emoji arrays that are available in the current version of iOS.
+    /// Returns categories with filtered emoji arrays that are available on the current platform version.
     func getEmojisForCurrentIOSVersion() -> [MCEmojiCategory]
 }
 
@@ -54,7 +56,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
     
     // MARK: - Public Methods
     
-    /// Returns all emojis available for the current device's iOS version.
+    /// Returns all emojis available for the current device's platform version.
     func getEmojisForCurrentIOSVersion() -> [MCEmojiCategory] {
         let frequentlyUsedEmojis: MCEmojiCategory = .init(
             type: .frequentlyUsed,
@@ -86,8 +88,9 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
 
     // MARK: - Private Properties
     
-    /// The maximum available emoji version for the current iOS version.
+    /// The maximum available emoji version for the current platform version.
     private static let maxCurrentAvailableEmojiVersion: Double = {
+#if canImport(UIKit)
         let currentIOSVersion = (UIDevice.current.systemVersion as NSString).floatValue
         switch currentIOSVersion {
         case 12.1...13.1:
@@ -105,6 +108,17 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
         default:
             return 5.0
         }
+#else
+        let version = ProcessInfo.processInfo.operatingSystemVersion
+        switch version.majorVersion {
+        case 14...:
+            return 15.0
+        case 13:
+            return 15.0
+        default:
+            return 14.0
+        }
+#endif
     }()
 
     /// Loads the emoji category from the type-specific JSON file in the resources directory.
