@@ -1,5 +1,9 @@
 # MCEmojiPicker
 
+This is the cammalleri.dev fork of [Ivan Izyumkin’s MCEmojiPicker](https://github.com/izyumkin/MCEmojiPicker), preserving Passable’s iOS, macOS, and visionOS improvements. See [fork provenance and maintenance](Documentation/ForkMaintenance.md) for the upstream baseline, ported commits, compatibility, and release checks. The upstream README follows below.
+
+The maintained Swift Package URL is `https://github.com/ANGOmarcello/MCEmojiPicker.git`. Fork releases use their own version tags. The CocoaPods instructions below describe the original upstream distribution; this fork does not publish to CocoaPods.
+
 [![Version](https://img.shields.io/cocoapods/v/MCEmojiPicker.svg?style=flat)](https://cocoapods.org/pods/MCEmojiPicker)
 [![License](https://img.shields.io/cocoapods/l/MCEmojiPicker.svg?style=flat)](https://cocoapods.org/pods/MCEmojiPicker)
 [![Platform](https://img.shields.io/cocoapods/p/MCEmojiPicker.svg?style=flat)](https://cocoapods.org/pods/MCEmojiPicker)

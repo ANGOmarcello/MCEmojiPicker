@@ -1,6 +1,15 @@
+//
+//  MCEmojiPickerMacView.swift
+//  MCEmojiPicker
+//
+//  Created by Angelo Cammalleri.
+//  Passable additions are distributed under the repository MIT license.
+//
+
 #if os(macOS)
 import SwiftUI
 
+@available(macOS 13.0, *)
 struct MCEmojiPickerMacView: View {
     @Binding var isPresented: Bool
     @Binding var selectedEmoji: String
@@ -24,7 +33,7 @@ struct MCEmojiPickerMacView: View {
 
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 12) {
-                    ForEach(visibleCategories.enumerated(), id: \.element.type) { _, category in
+                    ForEach(visibleCategories, id: \.type) { category in
                         if category.emojis.isEmpty == false {
                             Text(category.categoryName)
                                 .font(.caption)
