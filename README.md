@@ -23,16 +23,10 @@ Passable's changes were ported as focused commits on top of upstream
 See [fork provenance and maintenance](Documentation/ForkMaintenance.md) for
 commit origins, compatibility details, and the update process.
 
-This package owns emoji selection. AppToolkit combines it with image,
-SF Symbol, Photos, Files, and camera selection; Passable supplies its editor,
-expanding camera sheet, design tokens, and image-processing policy.
-
 ## Apps using this fork
 
 **[Passable](https://apps.apple.com/app/id6756588944)** — create custom Apple
-Wallet passes. These additions originated in Passable's emoji picker, which
-now integrates this fork through AppToolkit's media picker components for
-avatar and logo emoji selection.
+Wallet passes, with this fork powering avatar and logo emoji selection.
 
 Using this fork in your app? Open a pull request to add it here.
 
