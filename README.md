@@ -124,11 +124,13 @@ viewController.selectedEmojiCategoryTintColor = .systemRed
 ```
 
 ### Arrow direction
-The direction of the arrow for EmojiPicker. The default value of this property is `.up`.
+By default, EmojiPicker lets the system choose whether to open above or below the source view so the picker remains visible. Set an explicit direction when a fixed placement is required.
 
 ```swift
 viewController.arrowDirection = .up
 ```
+
+For UIKit integrations, assigning `arrowDirection` disables automatic placement. Set `automaticallyAdjustsArrowDirection` back to `true` to restore it.
 
 ### Horizontal inset
 Inset from the `sourceView` border. The default value of this property is `0`.

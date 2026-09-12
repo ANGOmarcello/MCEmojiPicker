@@ -40,7 +40,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     
     /// The direction of the arrow for EmojiPicker.
     ///
-    /// The default value of this property is `.up`.
+    /// The default value is `nil`, which lets the system choose between opening above or below the source view.
     public var arrowDirection: MCPickerArrowDirection?
     
     /// Custom height for EmojiPicker.

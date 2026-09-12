@@ -36,8 +36,18 @@ public final class MCEmojiPickerViewController: UIViewController {
     
     /// The direction of the arrow for EmojiPicker.
     ///
-    /// The default value of this property is `.up`.
-    public var arrowDirection: MCPickerArrowDirection = .up
+    /// Setting this property opts out of automatic vertical placement.
+    public var arrowDirection: MCPickerArrowDirection = .up {
+        didSet {
+            automaticallyAdjustsArrowDirection = false
+        }
+    }
+
+    /// A boolean value that lets the system choose whether the picker opens above or below its source view.
+    ///
+    /// The default value is `true`. Assigning `arrowDirection` changes this value to `false` so existing
+    /// explicit direction choices remain authoritative.
+    public var automaticallyAdjustsArrowDirection: Bool = true
     
     /// Custom height for EmojiPicker.
     /// But it will be limited by the distance from sourceView.origin.y to the upper or lower bound(depends on permittedArrowDirections).
@@ -183,8 +193,9 @@ public final class MCEmojiPickerViewController: UIViewController {
     }
     
     private func setupArrowDirections() {
+        let explicitDirection = automaticallyAdjustsArrowDirection ? nil : arrowDirection
         popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(
-            rawValue: arrowDirection.rawValue
+            rawValue: MCPickerArrowDirectionResolver.permittedRawValue(explicitDirection: explicitDirection)
         )
     }
     

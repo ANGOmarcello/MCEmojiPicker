@@ -27,3 +27,12 @@ public enum MCPickerArrowDirection: UInt {
     case up = 1
     case down = 2
 }
+
+enum MCPickerArrowDirectionResolver {
+    static func permittedRawValue(explicitDirection: MCPickerArrowDirection?) -> UInt {
+        guard let explicitDirection = explicitDirection else {
+            return MCPickerArrowDirection.up.rawValue | MCPickerArrowDirection.down.rawValue
+        }
+        return explicitDirection.rawValue
+    }
+}

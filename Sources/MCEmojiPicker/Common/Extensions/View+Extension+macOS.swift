@@ -14,7 +14,7 @@ extension View {
         selectedEmojiCategoryTintColor: NSColor? = nil,
         feedBackGeneratorStyle: MCEmojiFeedbackStyle? = nil
     ) -> some View {
-        self.popover(isPresented: isPresented, arrowEdge: .bottom) {
+        self.popover(isPresented: isPresented, arrowEdge: arrowDirection?.popoverArrowEdge) {
             MCEmojiPickerMacView(
                 isPresented: isPresented,
                 selectedEmoji: selectedEmoji,
@@ -23,6 +23,17 @@ extension View {
             )
             .frame(maxHeight: customHeight ?? 360)
             .padding(.horizontal, horizontalInset ?? 0)
+        }
+    }
+}
+
+private extension MCPickerArrowDirection {
+    var popoverArrowEdge: Edge {
+        switch self {
+        case .up:
+            return .top
+        case .down:
+            return .bottom
         }
     }
 }
